@@ -1,4 +1,4 @@
-//version: 1642464427
+//version: 1642484596
 /*
 DO NOT CHANGE THIS FILE!
 
@@ -88,6 +88,7 @@ checkPropertyExists("containsMixinsAndOrCoreModOnly")
 checkPropertyExists("usesShadowedDependencies")
 checkPropertyExists("developmentEnvironmentUserName")
 
+boolean noPublishedSources = project.findProperty("noPublishedSources") ? project.noPublishedSources.toBoolean() : false
 
 String javaSourceDir = "src/main/java/"
 String scalaSourceDir = "src/main/scala/"
@@ -484,7 +485,9 @@ task apiJar(type: Jar) {
 }
 
 artifacts {
-    archives sourcesJar
+    if(!noPublishedSources) {
+        archives sourcesJar
+    }
     archives devJar
     if(apiPackage) {
         archives apiJar
@@ -495,9 +498,11 @@ artifacts {
 publishing {
     publications {
         maven(MavenPublication) {
-            artifact source: jar
-            artifact source: sourcesJar, classifier: "src"
-            artifact source: devJar, classifier: "dev"
+            artifact source: usesShadowedDependencies.toBoolean() ? shadowJar : jar, classifier: ""
+            if(!noPublishedSources) {
+                artifact source: sourcesJar, classifier: "src"
+            }
+            artifact source: usesShadowedDependencies.toBoolean() ? shadowDevJar : devJar, classifier: "dev"
             if (apiPackage) {
                 artifact source: apiJar, classifier: "api"
             }
