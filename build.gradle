@@ -1,4 +1,4 @@
-//version: 1644894948
+//version: 1646409286
 /*
 DO NOT CHANGE THIS FILE!
 
@@ -103,6 +103,7 @@ checkPropertyExists("usesShadowedDependencies")
 checkPropertyExists("developmentEnvironmentUserName")
 
 boolean noPublishedSources = project.findProperty("noPublishedSources") ? project.noPublishedSources.toBoolean() : false
+boolean usesMixinDebug = project.findProperty('usesMixinDebug') ?: project.usesMixins.toBoolean()
 
 String javaSourceDir = "src/main/java/"
 String scalaSourceDir = "src/main/scala/"
@@ -217,7 +218,7 @@ if (usesMixins.toBoolean()) {
     arguments += [
         "--tweakClass org.spongepowered.asm.launch.MixinTweaker"
     ]
-    if (!project.hasProperty(usesMixinDebug) || usesMixinDebug.toBoolean()) {
+    if (usesMixinDebug.toBoolean()) {
         jvmArguments += [
             "-Dmixin.debug.countInjections=true",
             "-Dmixin.debug.verbose=true",
