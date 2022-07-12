@@ -6,6 +6,7 @@ name: Release latest starter and migration packages
 on:
   push:
     branches: [ master, main ]
+    tags: [ '*' ]
 
 jobs:
   zip-and-release-packages:
@@ -31,8 +32,7 @@ jobs:
                 \
                 -x ".github/scripts/update-version.sh" \
                 -x ".github/workflows/buildscript-maintenance.yml" \
-                -x ".github/workflows/release-packages-latest.yml" \
-                -x ".github/workflows/release-packages-tags.yml" \
+                -x ".github/workflows/release-packages.yml" \
                 \
                 -x "*docs/*" \
                 -x "README.md" \
@@ -51,8 +51,7 @@ jobs:
                 \
                 -x ".github/scripts/update-version.sh" \
                 -x ".github/workflows/buildscript-maintenance.yml" \
-                -x ".github/workflows/release-packages-latest.yml" \
-                -x ".github/workflows/release-packages-tags.yml" \
+                -x ".github/workflows/release-packages.yml" \
                 \
                 -x "*docs/*" \
                 -x "*src/*" \
@@ -64,9 +63,20 @@ jobs:
 
       - name: Update latest tag
         uses: "marvinpinto/action-automatic-releases@latest"
+        if: ${{ (github.ref == 'master' || github.ref == 'main') }}
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest-packages"
-          prerelease: false
+          prerelease: true
           title: "Latest starter and migration packages"
+          files: packages/*
+
+      - name: Release named version
+        if: ${{ !(github.ref == 'master' || github.ref == 'main') }}
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ env.RELEASE_VERSION }}-packages"
+          prerelease: false
+          title: "${{ env.RELEASE_VERSION }} starter and migration packages"
           files: packages/*
