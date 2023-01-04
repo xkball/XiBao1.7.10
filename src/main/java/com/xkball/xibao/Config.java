@@ -1,10 +1,13 @@
-package com.myname.mymodid;
+package com.xkball.xibao;
 
+import cpw.mods.fml.common.Loader;
 import java.io.File;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
 public class Config {
+
+    public static boolean isGTNH = Loader.isModLoaded("dreamcraft");
 
     private static class Defaults {
         public static final String greeting = "Hello World";
