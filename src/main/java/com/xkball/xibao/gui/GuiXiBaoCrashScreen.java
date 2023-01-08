@@ -38,14 +38,14 @@ public class GuiXiBaoCrashScreen extends GuiXiBaoScreen {
         buttonList.add(new GuiButton(
                 1,
                 width / 2 - 50,
-                height / 4 + 120 + 12,
+                height / 4 + 120 + 25,
                 110,
                 20,
                 I18n.format("bettercrashes.gui.common.openCrashReport")));
         buttonList.add(new GuiButton(
                 2,
                 width / 2 - 50 + 115,
-                height / 4 + 120 + 12,
+                height / 4 + 120 + 25,
                 110,
                 20,
                 I18n.format("bettercrashes.gui.common.uploadReportAndCopyLink")));
@@ -53,7 +53,8 @@ public class GuiXiBaoCrashScreen extends GuiXiBaoScreen {
             buttonList.add(new GuiButton(
                     3,
                     width / 2 - 50 - 15,
-                    height / 4 + 120 + 12 + 25,
+                    // 原为12
+                    height / 4 + 120 + 25 + 25,
                     140,
                     20,
                     I18n.format("bettercrashes.gui.common.gtnhIssueTracker")));
@@ -61,7 +62,7 @@ public class GuiXiBaoCrashScreen extends GuiXiBaoScreen {
         GuiOptionButton mainMenuButton = new GuiOptionButton(
                 0,
                 width / 2 - 50 - 115,
-                height / 4 + 120 + 12,
+                height / 4 + 120 + 25,
                 110,
                 20,
                 I18n.format("bettercrashes.gui.crash.toTitle"));
@@ -118,7 +119,7 @@ public class GuiXiBaoCrashScreen extends GuiXiBaoScreen {
 
             int textColor = ColorUtil.color(190, 190, 190, 255);
             int x1 = width / 2 - 155;
-            int y1 = (height / 4) + 20;
+            int y1 = (height / 4) + 40;
             if (hasUnsupportedMods) {
                 y1 -= 32;
             }
