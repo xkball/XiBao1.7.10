@@ -1,0 +1,16 @@
+[
+{
+  "modid": "xibao",
+  "name": "XiBao",
+  "description": "Show a celebrating image when you game crashed or disconnected from server.",
+  "version": "1.0",
+  "mcversion": "1.12.2",
+  "url": "https://github.com/xkball/XiBao1.7.10",
+  "updateUrl": "",
+  "authorList": ["xkball"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
