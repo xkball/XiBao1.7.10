@@ -11,11 +11,12 @@ import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = "xibao")
 public class ClientEvent {
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onDrawnBackground(GuiScreenEvent.BackgroundDrawnEvent event){
         //XiBao.log("test");
         GuiScreen gui = event.getGui();
